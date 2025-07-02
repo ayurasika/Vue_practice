@@ -1,36 +1,32 @@
 <template>
-  <div>
-    <h1>今日のTodoリストよ！💖</h1>
-    <todo-item
-      v-for="todo in todos"
-      :key="todo.id"
-      :task="todo.text"
-      :is-completed="todo.completed"
-      @toggle-complete="handleToggleComplete(todo.id)"
-    ></todo-item>
-    <p v-if="allCompleted">全部終わったわ！素晴らしい！🎉</p>
-  </div>
+  <div :style="{ backgroundColor: myColor }" class="color-box"> <h2>背景色が変わる魔法の箱</h2>
+    <button @click="changeColor">色を変える魔法のボタン</button> </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import TodoItem from './components/TodoItem.vue';
+import { ref } from 'vue'; // 大事な魔法の道具を呼んでるわ
 
-const todos = ref([
-  { id: 1, text: '豆腐を買いに行く', completed: false },
-  { id: 2, text: 'トイレ掃除', completed: true },
-  { id: 3, text: 'ネイルを塗り直す', completed: false }
-]);
+const myColor = ref('lightblue'); // ①これが、色をしまっておく箱よ。最初は水色ね。
 
-function handleToggleComplete(todoId) {
-  const todo = todos.value.find(t => t.id === todoId);
-  if (todo) {
-    todo.completed = !todo.completed; // 完了状態を反転させるわ
-    console.log(`タスク「${todo.text}」の完了状態が変更されたわ！`);
+// ②これが、色を変える魔法の呪文よ
+function changeColor() {
+  if (myColor.value === 'lightblue') {
+    myColor.value = 'lightcoral'; // もし今の色が水色なら、サンゴ色に変えるわ
+  } else {
+    myColor.value = 'lightblue'; // それ以外なら、水色に戻すわ
   }
 }
-
-const allCompleted = computed(() => {
-  return todos.value.every(todo => todo.completed);
-});
 </script>
+
+<style scoped>
+.color-box {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #333;
+  transition: background-color 0.5s ease; /* 色が変わるときにゆっくり変化する魔法よ */
+}
+</style>
