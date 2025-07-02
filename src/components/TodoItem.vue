@@ -23,7 +23,7 @@
   
   function toggleItem() {
     emit('toggle-complete');
-    console.log(`子で「${props.task}」の完了状態変更を親に伝えたわ！`);
+    console.log(`子で「${props.task}」の完了状態変更を親に伝えたよ！`);
   }
   </script>
   
