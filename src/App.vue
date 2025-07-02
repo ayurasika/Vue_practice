@@ -18,7 +18,7 @@ import TodoItem from './components/TodoItem.vue';
 
 const todos = ref([
   { id: 1, text: '豆腐を買いに行く', completed: false },
-  { id: 2, text: 'お風呂掃除', completed: true },
+  { id: 2, text: 'トイレ掃除', completed: true },
   { id: 3, text: 'ネイルを塗り直す', completed: false }
 ]);
 
