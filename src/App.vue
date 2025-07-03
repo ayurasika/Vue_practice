@@ -1,32 +1,48 @@
 <template>
-  <div :style="{ backgroundColor: myColor }" class="color-box"> <h2>背景色が変わる魔法の箱</h2>
-    <button @click="changeColor">色を変える魔法のボタン</button> </div>
+  <div :class="bgClass" class="box">
+    <p>{{ message }}</p>
+    <button @click="toggleLogin">{{ buttonLabel }}</button>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'; // 大事な魔法の道具を呼んでるわ
+import { ref, computed } from 'vue'
 
-const myColor = ref('lightblue'); // ①これが、色をしまっておく箱よ。最初は水色ね。
+const isLoggedIn = ref(false)
 
-// ②これが、色を変える魔法の呪文よ
-function changeColor() {
-  if (myColor.value === 'lightblue') {
-    myColor.value = 'lightcoral'; // もし今の色が水色なら、サンゴ色に変えるわ
-  } else {
-    myColor.value = 'lightblue'; // それ以外なら、水色に戻すわ
-  }
+// 背景クラスを computed で切り替える！
+const bgClass = computed(() =>
+  isLoggedIn.value ? 'bg-logged-in' : 'bg-logged-out'
+)
+
+const message = computed(() =>
+  isLoggedIn.value ? 'ようこそ、あゆみちゃんさん✨' : 'ログインしてください'
+)
+
+const buttonLabel = computed(() =>
+  isLoggedIn.value ? 'ログアウトする' : 'ログインする'
+)
+
+const toggleLogin = () => {
+  isLoggedIn.value = !isLoggedIn.value
 }
 </script>
 
 <style scoped>
-.color-box {
-  width: 300px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #333;
-  transition: background-color 0.5s ease; /* 色が変わるときにゆっくり変化する魔法よ */
+.box {
+  padding: 2rem;
+  text-align: center;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* ログイン状態の背景色 */
+.bg-logged-in {
+  background-color: #d0f0c0; /* 薄い緑 */
+}
+
+/* ログアウト状態の背景色 */
+.bg-logged-out {
+  background-color: #ffe4e1; /* 薄いピンク */
 }
 </style>
