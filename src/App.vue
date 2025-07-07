@@ -1,11 +1,17 @@
 <template>
   <div>
-    <MyButton>保存する💾</MyButton>
-    <MyButton>削除する🗑️</MyButton>
-    <MyButton><strong>強調ボタン🔥</strong></MyButton>
+    <button @click="toggle">表示／非表示 切り替え</button>
+    <TimerComponent v-if="show" />
   </div>
 </template>
 
 <script setup>
-import MyButton from './components/MyButton.vue';
+import { ref } from 'vue'
+import TimerComponent from './components/TimerComponent.vue'
+
+const show = ref(true)
+
+const toggle = () => {
+  show.value = !show.value
+}
 </script>
