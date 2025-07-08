@@ -1,20 +1,21 @@
+<!-- TimerComponent.vue -->
 <template>
-    <p>カチカチ動作中... コンソール見てね！</p>
+    <div>タイマーコンポーネント</div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 
-const intervalId = ref(null)
+const intervalId = ref()
 
 onMounted(() => {
     intervalId.value = setInterval(() => {
-console.log('⏰ カチカチ...（onMounted中）')
-    }, 5000)
+console.log('🕒 動いてるわよ〜')
+    }, 1000)
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
     clearInterval(intervalId.value)
-    console.log('🛑 タイマー止めたわよ（onUnmounted）')
+    console.log('🧹 お片付けよ！（onBeforeUnmount）')
 })
 </script>
