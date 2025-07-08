@@ -1,12 +1,14 @@
-<!-- 親コンポーネント -->
 <template>
-  <button @click="show = !show">切り替え</button>
-  <TimerComponent v-if="show" />
+  <keep-alive>
+    <MyPage v-if="showPage" />
+  </keep-alive>
+
+  <button @click="showPage = !showPage">切り替えボタン</button>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import TimerComponent from './components/TimerComponent.vue'
+import MyPage from './components/MyPage.vue'
 
-const show = ref(false)
+const showPage = ref(true)
 </script>
