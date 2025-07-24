@@ -1,19 +1,30 @@
 <template>
   <div>
-    <h1>ユーザー選択</h1>
-    <select v-model="selectedId">
-      <option value="1">ユーザー1</option>
-      <option value="2">ユーザー2</option>
-      <option value="3">ユーザー3</option>
-    </select>
+    <h1>親子コンポーネントの連携 (v-model版)</h1>
 
-    <UserProfile :user-id="selectedId" />
+    <InputComponent v-model="name" />
+
+    <p>{{ name }}さん、こんにちは！</p>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import UserProfile from './UserProfile.vue';
+import InputComponent from './components/InputComponent.vue';
 
-const selectedId = ref(1);
+// 状態管理の仕方は変わらない
+const name = ref('宝塚');
 </script>
+
+<style scoped>
+div {
+  display: grid;
+  gap: 16px; /* 要素間のスペース */
+  font-family: sans-serif;
+}
+
+p {
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>

@@ -12,7 +12,6 @@
   
   <script setup>
   import { ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
   
   const props = defineProps({
     userId: Number
@@ -23,7 +22,7 @@
   watch(() => props.userId, async (id) => {
     userData.value = null; // 読み込み中表示用
     try {
-      const res = await fetch(`https://example.com/api/user/${id}`);
+      const res = await fetch(`http://localhost:3000/user/${id}`);
       if (!res.ok) throw new Error('エラーが発生したわ！');
       const data = await res.json();
       userData.value = data;
