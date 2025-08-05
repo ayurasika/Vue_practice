@@ -1,33 +1,38 @@
 <template>
-    <input 
-      :value="modelValue" 
-      @input="onInput" 
-      placeholder="お名前を入力してください"
-    >
-  </template>
-  
-  <script setup>
-  // v-modelのルールに従い、props名を'modelValue'にする
-  defineProps({
-    modelValue: String
-  });
-  
-  // v-modelのルールに従い、emit名を'update:modelValue'にする
-  const emit = defineEmits(['update:modelValue']);
-  
-  function onInput(event) {
-    // 'update:modelValue'イベントを親へ発行する
-    emit('update:modelValue', event.target.value);
+  <div :class="['completed-task', isCompleted ? 'isCompleted' : '']">
+    <input type="checkbox" :checked="isCompleted" @change="toggleItem" />
+    <span>{{ task }}</span>
+  </div>
+</template>
+
+<script setup>
+import { defineProps, defineEmits } from 'vue'
+
+const props = defineProps({
+  task: {
+    type: String,
+    required: true
+  },
+  isCompleted: {
+    type: Boolean,
+    required: true
   }
-  </script>
-  
-  <style scoped>
-  /* このコンポーネントのみに適用されるスタイル */
-  input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 250px;
-  }
-  </style>
+})
+
+const emit = defineEmits(['toggle-complete'])
+
+function toggleItem() {
+  emit('toggle-complete')
+  console.log(`子で「${props.task}」の完了状態を親に伝えたわよ！`)
+}
+</script>
+
+<style scoped>
+.completed-task {
+  margin: 8px 0;
+}
+.isCompleted {
+  text-decoration: line-through;
+  color: gray;
+}
+</style>
